@@ -1,0 +1,28 @@
+{
+  "name": "vitessecms/openai",
+  "type": "library",
+  "description": "OpenAI module for VitesseCms",
+  "keywords": [
+    "php",
+    "phalcon",
+    "vitessecms"
+  ],
+  "homepage": "https://github.com/thedigitalproblemsolver/VitesseCMS",
+  "license": "GPL-2.0-or-later",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Jasper Jaklofsky",
+      "email": "info@thedigitalproblemsolver.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "VitesseCms\\OpenAI\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "ext-phalcon": "5.1.4"
+  }
+}
