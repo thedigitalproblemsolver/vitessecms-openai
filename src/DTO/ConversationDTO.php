@@ -11,7 +11,7 @@ final class ConversationDTO
         private readonly string $model,
         private readonly string $systemContent,
         private readonly string $userContent,
-        private readonly string $retutnType = 'html'
+        private readonly string $returnType = 'html'
     ) {
     }
 
@@ -22,13 +22,14 @@ final class ConversationDTO
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => $this->systemContent
+                    'content' => $this->systemContent,
                 ],
                 [
                     'role' => 'user',
-                    'content' => $this->userContent . match ($this->retutnType) {
-                            default => ' Please do the html formatting of the content.'
-                        }
+                    'content' => $this->userContent.match ($this->returnType) {
+                        'html' => ' Please do the html formatting of the content.',
+                        default => ''
+                    },
                 ],
             ],
         ];
@@ -37,8 +38,8 @@ final class ConversationDTO
     public function getCurlHeader(): array
     {
         return [
-            'Authorization: Bearer ' . $this->apiKey,
-            'Content-Type: application/json'
+            'Authorization: Bearer '.$this->apiKey,
+            'Content-Type: application/json',
         ];
     }
 }

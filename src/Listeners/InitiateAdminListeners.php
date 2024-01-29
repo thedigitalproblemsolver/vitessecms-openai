@@ -6,15 +6,22 @@ namespace VitesseCms\OpenAI\Listeners;
 
 use VitesseCms\Core\Interfaces\InjectableInterface;
 use VitesseCms\Media\Enums\MediaEnum;
+use VitesseCms\OpenAI\Enum\ChatGPTEnum;
+use VitesseCms\OpenAI\Listeners\Services\ChatGPTServiceListener;
+use VitesseCms\OpenAI\Services\ChatGPTService;
 
 class InitiateAdminListeners
 {
-    public static function setListeners(InjectableInterface $di): void
+    public static function setListeners(InjectableInterface $injectable): void
     {
-        $di->eventsManager->attach(
+        $injectable->eventsManager->attach(
             MediaEnum::ASSETS_LOAD_GENERIC,
-            new RenderAdminListener($di->assets, $di->configuration->getVendorNameDir()),
+            new RenderAdminListener($injectable->assets, $injectable->configuration->getVendorNameDir()),
             1
+        );
+        $injectable->eventsManager->attach(
+            ChatGPTEnum::SERVICE_LISTENER->value,
+            new ChatGPTServiceListener(new ChatGPTService())
         );
     }
 }
