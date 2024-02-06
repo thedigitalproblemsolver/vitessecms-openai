@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VitesseCms\OpenAI\Forms;
 
+use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Form\AbstractForm;
 use VitesseCms\Form\Helpers\ElementHelper;
 use VitesseCms\Form\Models\Attributes;
@@ -19,6 +20,10 @@ final class PromptForm extends AbstractForm
     private AssetsService $assetsService;
     private bool $loadAssets = false;
 
+    /**
+     * @param ?AbstractCollection $entity
+     * @param array<mixed>        $userOptions
+     */
     public function __construct($entity = null, array $userOptions = [])
     {
         parent::__construct($entity, $userOptions);
