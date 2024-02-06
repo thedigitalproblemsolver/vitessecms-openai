@@ -7,6 +7,8 @@ namespace VitesseCms\OpenAI\Listeners;
 use VitesseCms\Core\Interfaces\InjectableInterface;
 use VitesseCms\Media\Enums\MediaEnum;
 use VitesseCms\OpenAI\Enum\ChatGPTEnum;
+use VitesseCms\OpenAI\Enum\PromptFormEnum;
+use VitesseCms\OpenAI\Listeners\Forms\PromptFormListener;
 use VitesseCms\OpenAI\Listeners\Services\ChatGPTServiceListener;
 use VitesseCms\OpenAI\Services\ChatGPTService;
 
@@ -22,6 +24,10 @@ class InitiateAdminListeners
         $injectable->eventsManager->attach(
             ChatGPTEnum::SERVICE_LISTENER->value,
             new ChatGPTServiceListener(new ChatGPTService())
+        );
+        $injectable->eventsManager->attach(
+            PromptFormEnum::LISTENER->value,
+            new PromptFormListener($injectable->assets)
         );
     }
 }

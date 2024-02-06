@@ -57,8 +57,8 @@ final class AdminchatgptController extends AbstractControllerAdmin
                 new ConversationDTO(
                     getenv('CHATGPT_API_KEY') ? getenv('CHATGPT_API_KEY') : '',
                     'gpt-3.5-turbo',
-                    'You are a SEO specialist.',
-                    $this->replaceTags($item, $this->request->getPost('prompt'))
+                    $this->request->getPost('chatgpt_agent'),
+                    $this->replaceTags($item, $this->request->getPost('chatgpt_prompt'))
                 )
             );
 
