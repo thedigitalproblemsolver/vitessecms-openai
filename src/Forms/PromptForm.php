@@ -22,7 +22,7 @@ final class PromptForm extends AbstractForm
 
     /**
      * @param ?AbstractCollection $entity
-     * @param array<mixed>        $userOptions
+     * @param array<mixed> $userOptions
      */
     public function __construct($entity = null, array $userOptions = [])
     {
@@ -41,6 +41,7 @@ final class PromptForm extends AbstractForm
         $this->addText('Je agent', 'chatgpt_agent', (new Attributes())->setRequired());
         $this->setDropdown(SettingEnum::CHATGPT_BASE_PROMPTS->value, 'Basis prompt');
         $this->addText('Je prompt', 'chatgpt_prompt', (new Attributes())->setRequired());
+        $this->addHidden('successFunction', 'sdsdsd');
         $this->addSubmitButton('Stel je vraag');
         if ($this->loadAssets) {
             $this->assetsService->setEventLoader(PromptFormEnum::EVENT_BUILD_JAVASCRIPT->value);

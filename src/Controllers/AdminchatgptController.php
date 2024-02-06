@@ -36,7 +36,7 @@ final class AdminchatgptController extends AbstractControllerAdmin
 
         $this->viewService->set(
             'content',
-            $promptForm->renderForm('admin/openai/adminchatgpt/handlepromptform/'.$itemId)
+            $promptForm->renderForm('admin/openai/adminchatgpt/handlepromptform/'.$itemId, 'promptForm')
         );
     }
 
@@ -62,7 +62,7 @@ final class AdminchatgptController extends AbstractControllerAdmin
                 )
             );
 
-            $this->viewService->set('content', $completionDTO->getMessage());
+            $this->jsonResponse(['content' => $completionDTO->getMessage()]);
         }
     }
 
