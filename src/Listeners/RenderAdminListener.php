@@ -15,8 +15,9 @@ final class RenderAdminListener
     public function loadGeneric(): void
     {
         $this->assetsService->loadFontAwesome();
-        $this->assetsService->addInlineJs(
-            file_get_contents($this->vendorBaseDir . 'openai/src/Resources/js/initOpenAIUI.js')
-        );
+        $content = file_get_contents($this->vendorBaseDir.'openai/src/Resources/js/initOpenAIUI.js');
+        if (is_string($content)) {
+            $this->assetsService->addInlineJs($content);
+        }
     }
 }
