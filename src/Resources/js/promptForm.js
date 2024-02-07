@@ -6,7 +6,7 @@ var promptForm = {
     },
     fillElementWithResponse: function (response) {
         var HTMLstring = response.content;
-        window.top.$('#introtext_nl').summernote('pasteHTML', HTMLstring);
+        window.top.$('#' + response.target).summernote('pasteHTML', HTMLstring);
         window.top.document.getElementsByClassName('modal-backdrop')[0].remove();
         window.top.document.getElementsByTagName('body')[0].className = 'admin';
         window.top.document.getElementById('modal').remove();

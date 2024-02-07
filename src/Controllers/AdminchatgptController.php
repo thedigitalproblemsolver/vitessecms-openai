@@ -15,7 +15,7 @@ use VitesseCms\OpenAI\Services\ChatGPTService;
 
 final class AdminchatgptController extends AbstractControllerAdmin
 {
-    protected ChatGPTService $chatGPTService;
+    private ChatGPTService $chatGPTService;
     private ItemRepository $itemRepository;
 
     public function OnConstruct()
@@ -29,21 +29,21 @@ final class AdminchatgptController extends AbstractControllerAdmin
         );
     }
 
-    public function promptFormAction(string $itemId): void
+    public function promptFormAction(string $itemId, string $target): void
     {
         $promptForm = new PromptForm();
         $promptForm->buildForm();
 
         $this->viewService->set(
             'content',
-            $promptForm->renderForm('admin/openai/adminchatgpt/handlepromptform/'.$itemId, 'promptForm')
+            $promptForm->renderForm('admin/openai/adminchatgpt/handlepromptform/'.$itemId.'/'.$target, 'promptForm')
         );
     }
 
     /**
      * @throws \Exception
      */
-    public function handlePromptFormAction(string $itemId): void
+    public function handlePromptFormAction(string $itemId, string $target): void
     {
         $promptForm = new PromptForm();
         $promptForm->buildForm();
@@ -62,7 +62,10 @@ final class AdminchatgptController extends AbstractControllerAdmin
                 )
             );
 
-            $this->jsonResponse(['content' => $completionDTO->getMessage()]);
+            $this->jsonResponse([
+                'content' => $completionDTO->getMessage(),
+                'target' => $target,
+            ]);
         }
     }
 
